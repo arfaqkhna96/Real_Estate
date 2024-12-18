@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_estate_property_rent_form" model="ir.ui.view">
+        <field name="name">estate.property.rent.form</field>
+        <field name="model">estate.property.rent</field>
+        <field name="arch" type="xml">
+            <form string="Property Rent Details">
+                <sheet>
+                    <!-- Two Columns Layout -->
+                    <header>
+                        <button name="action_create_payment" type="object" string="Pay" class="btn-primary"/>
+                    </header>
+                    <group colspan="2">
+                        <!-- Left Column: Basic Property Information -->
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="is_occupied"/>
+                            <field name="rent_type"/>
+                            <field name="prop_status"/>
+                            <field name="prop_rent_price"/>
+                            <field name="security_deposit"/>
+                        </group>
+
+                        <!-- Right Column: Utilities and Maintenance -->
+                        <group string="Utilities &amp; Maintenance">
+                            <field name="electric_meter"/>
+                            <field name="water_meter"/>
+                            <field name="lift"/>
+                            <field name="generator"/>
+                            <field name="swimming_pool"/>
+                        </group>
+                    </group>
+
+                    <!-- Address Section -->
+                    <group string="Address" colspan="2">
+                        <group>
+                            <field name="addr_line_1" required="1"/>
+                            <field name="addr_line_2"/>
+                            <field name="addr_city"/>
+                        </group>
+                        <group>
+                            <field name="addr_state"/>
+                            <field name="addr_zip"/>
+                            <field name="addr_country"/>
+                        </group>
+                    </group>
+
+                    <!-- Property Details Section -->
+                    <group string="Property Details" colspan="2">
+                        <group>
+                            <field name="prop_area"/>
+                            <field name="rent_payment_frequency"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_estate_property_rent_kanban" model="ir.ui.view">
+        <field name="name">estate.property.rent.kanban</field>
+        <field name="model">estate.property.rent</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="prop_rent_price"/>
+                <field name="addr_city"/>
+                <field name="is_occupied"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-att-class="'oe_kanban_card oe_kanban_global_click'">
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <p t-att-class="(record.is_occupied.raw_value ? 'occupied' : 'vacant')"> </p>
+                                <div>
+                                    <field name="prop_rent_price" widget="monetary"
+                                           options='{"currency_field": "currency_id"}'/>
+                                </div>
+                                <div>
+                                    <field name="addr_city"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="estate_property_rent_list">
+        <field name="name">estate.property.rent.list</field>
+        <field name="model">estate.property.rent</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="prop_rent_price"/>
+                <field name="addr_line_1"/>
+                <field name="addr_city"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="action_estate_property_rent" model="ir.actions.act_window">
+        <field name="name">Properties for Rental</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">estate.property.rent</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+    <menuitem name="Property for Rent" sequence="2" parent="estate_main_menu" id="menu_property_for_rent"
+              action="action_estate_property_rent"/>
+</odoo>

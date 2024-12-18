@@ -1,0 +1,28 @@
+.kanban-card-green {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.kanban-card-red {
+    background-color: #f8d7da; /* Light red background */
+    border-left: 4px solid #dc3545; /* Red border */
+}
+
+
+.testing {
+    color:red;
+    }
+
+.occupied{
+    height:15px;
+    width:15px;
+    background-color:red;
+    border-radius:7.5px;
+    }
+
+.vacant{
+    height:15px;
+    width:15px;
+    background-color:green;
+    border-radius:7.5px;
+    }

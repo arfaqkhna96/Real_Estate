@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_real_estate_category">
+        <field name="name">Real Estate</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="group_estate_tenant" model="res.groups">
+        <field name="name">Tenant</field>
+        <field name="category_id" ref="Real_Estate.module_real_estate_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Tenant doesn't allow to modify data</field>
+    </record>
+    <record id="group_estate_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="Real_Estate.module_real_estate_category"/>
+        <field name="implied_ids" eval="[(4, ref('Real_Estate.group_estate_tenant'))]"/>
+        <field name="comment">You have no access to see others properties</field>
+    </record>
+</odoo>
+

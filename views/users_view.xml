@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the base.view_users_form view -->
+        <record id="view_users_form_inherit_properties" model="ir.ui.view">
+            <field name="name">res.users.form.inherit.properties</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <!-- Add a new notebook page at the end of the existing notebook -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Properties">
+                        <field name="property_ids" context="{'form_view_ref': 'estate.property_form_view'}">
+                            <list string="Properties">
+                                <field name="name"/>
+                                <field name="availability"/>
+                                <field name="salesperson_id"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
